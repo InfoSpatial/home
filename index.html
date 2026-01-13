@@ -369,14 +369,18 @@
             line-height: 1.8;
         }
         
-        .profile-img {
+        .company-logo {
             flex: 1;
             min-width: 300px;
             text-align: center;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
         
-        .profile-img::before {
+        .company-logo::before {
             content: '';
             position: absolute;
             top: -20px;
@@ -389,11 +393,15 @@
             opacity: 0.1;
         }
         
-        .profile-img img {
+        .logo-image {
             width: 100%;
-            max-width: 450px;
+            max-width: 300px;
+            height: auto;
             border-radius: 15px;
             box-shadow: var(--shadow);
+            object-fit: contain;
+            padding: 20px;
+            background: white;
         }
         
         /* GIS & Remote Sensing Section */
@@ -457,82 +465,62 @@
             line-height: 1.7;
         }
         
-        /* Experience Section */
-        .experience-timeline {
-            position: relative;
-            max-width: 1000px;
-            margin: 0 auto;
+        /* Industry Experience Section */
+        .industry-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
         }
         
-        .experience-timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 3px;
-            height: 100%;
-            background: var(--gradient);
-        }
-        
-        .experience-item {
+        .industry-card {
             background: white;
-            margin-bottom: 40px;
             border-radius: 15px;
+            padding: 35px 30px;
             box-shadow: var(--shadow);
-            overflow: hidden;
-            position: relative;
             transition: var(--transition);
+            text-align: center;
+            border-top: 5px solid var(--secondary);
         }
         
-        .experience-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        .industry-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
         }
         
-        .experience-header {
-            background: var(--gradient);
-            color: white;
-            padding: 25px 30px;
+        .industry-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
         }
         
-        .experience-header h3 {
-            font-size: 1.6rem;
-            margin-bottom: 5px;
-        }
-        
-        .experience-company {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            margin-bottom: 5px;
-        }
-        
-        .experience-date {
-            display: inline-block;
-            background: rgba(255,255,255,0.2);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            margin-top: 10px;
-        }
-        
-        .experience-content {
-            padding: 30px;
-        }
-        
-        .responsibilities {
-            list-style-type: none;
-            columns: 2;
-            column-gap: 40px;
-        }
-        
-        .responsibilities li {
+        .industry-card h3 {
+            color: var(--primary);
             margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+        
+        .industry-card p {
+            color: var(--light-text);
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+        
+        .industry-features {
+            list-style: none;
+            text-align: left;
+            margin-top: 20px;
+        }
+        
+        .industry-features li {
+            padding: 8px 0;
             padding-left: 25px;
             position: relative;
-            break-inside: avoid;
+            color: var(--text);
+            font-size: 0.95rem;
         }
         
-        .responsibilities li::before {
+        .industry-features li::before {
             content: '▸';
             position: absolute;
             left: 0;
@@ -801,10 +789,6 @@
                 font-size: 1.5rem;
             }
             
-            .responsibilities {
-                columns: 1;
-            }
-            
             .services-grid {
                 grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             }
@@ -861,6 +845,15 @@
             .section-title h2 {
                 font-size: 2.2rem;
             }
+            
+            .about-content {
+                flex-direction: column;
+                gap: 40px;
+            }
+            
+            .company-logo {
+                order: -1;
+            }
         }
         
         @media (max-width: 576px) {
@@ -872,12 +865,8 @@
                 grid-template-columns: 1fr;
             }
             
-            .service-card, .gis-item, .experience-item {
+            .service-card, .gis-item, .industry-card {
                 padding: 25px 20px;
-            }
-            
-            .experience-content {
-                padding: 20px;
             }
         }
 
@@ -939,7 +928,7 @@
                 <li><a href="#services">Services</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#expertise">Expertise</a></li>
-                <li><a href="#experience">Experience</a></li>
+                <li><a href="#industries">Industries</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
@@ -1057,13 +1046,14 @@
             </div>
             <div class="about-content">
                 <div class="about-text reveal">
-                    <p><strong>InfoSpatial</strong> is founded on the principle that location intelligence should be accessible, actionable, and transformative. With over 12 years of experience in GIS, Remote Sensing, and Data Analysis, we bridge the gap between complex spatial data and strategic business decisions.</p>
-                    <p>Our expertise spans across humanitarian response, urban planning, environmental monitoring, logistics optimization, and business intelligence. We combine technical proficiency with deep domain knowledge to deliver solutions that drive real impact.</p>
-                    <p>We believe in a collaborative approach, working closely with clients to understand their unique challenges and developing customized geospatial solutions that address specific needs while providing scalability for future growth.</p>
+                    <p><strong>InfoSpatial</strong> is a premier geospatial intelligence consultancy founded on the principle that location intelligence should be accessible, actionable, and transformative. With over 12 years of cumulative experience in GIS, Remote Sensing, and Spatial Data Analysis, we bridge the gap between complex spatial data and strategic business decisions.</p>
+                    <p>Our team combines technical expertise with deep domain knowledge across multiple industries including humanitarian response, urban planning, environmental monitoring, logistics optimization, and business intelligence. We deliver solutions that drive real impact and measurable results.</p>
+                    <p>We believe in a collaborative partnership approach, working closely with each client to understand their unique challenges and developing customized geospatial solutions that address specific needs while providing scalability for future growth.</p>
                     <p>Our mission is to empower organizations with the spatial intelligence needed to make informed decisions, optimize operations, and gain a competitive edge in an increasingly data-driven world.</p>
                 </div>
-                <div class="profile-img reveal">
-                    <img src="https://ethiotech.net/portfolio/portfolio.JPG" alt="InfoSpatial Founder - Mezgebe Dingil">
+                <div class="company-logo reveal">
+                    <img src="logo.png" alt="InfoSpatial Logo" class="logo-image">
+                    <h3 style="margin-top: 20px; color: var(--primary);">Professional Geospatial Solutions</h3>
                 </div>
             </div>
             
@@ -1074,7 +1064,7 @@
                     <div class="stat-label">Years Experience</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">200+</div>
+                    <div class="stat-number">150+</div>
                     <div class="stat-label">Projects Completed</div>
                 </div>
                 <div class="stat-item">
@@ -1133,65 +1123,98 @@
         </div>
     </section>
 
-    <!-- Experience Section -->
-    <section id="experience">
+    <!-- Industry Experience Section -->
+    <section id="industries">
         <div class="container">
             <div class="section-title">
-                <h2>Professional Experience</h2>
+                <h2>Industry Experience</h2>
                 <div class="title-decorator"></div>
-                <p>Proven track record in leading geospatial projects across multiple sectors</p>
+                <p>Serving diverse sectors with specialized geospatial solutions</p>
             </div>
             
-            <div class="experience-timeline">
-                <div class="experience-item reveal">
-                    <div class="experience-header">
-                        <h3>Information Management Officer</h3>
-                        <div class="experience-company">IOM (International Organization for Migration)</div>
-                        <span class="experience-date">October 2023 – Present</span>
+            <div class="industry-grid">
+                <div class="industry-card reveal">
+                    <div class="industry-icon">
+                        <i class="fas fa-hands-helping"></i>
                     </div>
-                    <div class="experience-content">
-                        <ul class="responsibilities">
-                            <li>Develop integrated data management systems for humanitarian response operations</li>
-                            <li>Create interactive dashboards and maps for donor reporting and decision-making</li>
-                            <li>Coordinate with UN agencies, NGOs, and government partners on data standards</li>
-                            <li>Lead capacity building workshops on data collection and analysis methodologies</li>
-                            <li>Implement GIS solutions for displacement tracking and needs assessment</li>
-                        </ul>
-                    </div>
+                    <h3>Humanitarian & Development</h3>
+                    <p>Geospatial solutions for disaster response, refugee management, and development project monitoring.</p>
+                    <ul class="industry-features">
+                        <li>Displacement tracking systems</li>
+                        <li>Needs assessment mapping</li>
+                        <li>Infrastructure planning</li>
+                        <li>Monitoring & evaluation</li>
+                    </ul>
                 </div>
                 
-                <div class="experience-item reveal">
-                    <div class="experience-header">
-                        <h3>Information Management Officer</h3>
-                        <div class="experience-company">iMMAP (Information Management and Mine Action Programs)</div>
-                        <span class="experience-date">October 2022 – September 2023</span>
+                <div class="industry-card reveal">
+                    <div class="industry-icon">
+                        <i class="fas fa-city"></i>
                     </div>
-                    <div class="experience-content">
-                        <ul class="responsibilities">
-                            <li>Designed and deployed humanitarian information management systems</li>
-                            <li>Produced sector-specific maps and infographics for emergency response</li>
-                            <li>Managed spatial databases and conducted complex geospatial analysis</li>
-                            <li>Trained humanitarian partners on GIS and data visualization tools</li>
-                            <li>Supported needs assessment and monitoring/evaluation activities</li>
-                        </ul>
-                    </div>
+                    <h3>Urban Planning & Smart Cities</h3>
+                    <p>Spatial intelligence for urban development, infrastructure planning, and smart city initiatives.</p>
+                    <ul class="industry-features">
+                        <li>Land use planning</li>
+                        <li>Infrastructure mapping</li>
+                        <li>Traffic flow analysis</li>
+                        <li>Urban growth modeling</li>
+                    </ul>
                 </div>
                 
-                <div class="experience-item reveal">
-                    <div class="experience-header">
-                        <h3>GIS Manager</h3>
-                        <div class="experience-company">Miya S.a.r.l.</div>
-                        <span class="experience-date">May 2022 – September 2022</span>
+                <div class="industry-card reveal">
+                    <div class="industry-icon">
+                        <i class="fas fa-leaf"></i>
                     </div>
-                    <div class="experience-content">
-                        <ul class="responsibilities">
-                            <li>Supervised GIS team and managed project deliverables</li>
-                            <li>Implemented quality control procedures for spatial data</li>
-                            <li>Developed training materials and conducted technical workshops</li>
-                            <li>Optimized geodatabase performance and server management</li>
-                            <li>Created monitoring and evaluation frameworks for GIS projects</li>
-                        </ul>
+                    <h3>Environmental Management</h3>
+                    <p>Remote sensing and GIS for environmental monitoring, conservation, and sustainability planning.</p>
+                    <ul class="industry-features">
+                        <li>Land cover classification</li>
+                        <li>Change detection analysis</li>
+                        <li>Habitat mapping</li>
+                        <li>Environmental impact assessment</li>
+                    </ul>
+                </div>
+                
+                <div class="industry-card reveal">
+                    <div class="industry-icon">
+                        <i class="fas fa-truck"></i>
                     </div>
+                    <h3>Logistics & Supply Chain</h3>
+                    <p>Route optimization, fleet tracking, and supply chain analysis using spatial intelligence.</p>
+                    <ul class="industry-features">
+                        <li>Route optimization</li>
+                        <li>Facility location analysis</li>
+                        <li>Delivery zone planning</li>
+                        <li>Supply chain mapping</li>
+                    </ul>
+                </div>
+                
+                <div class="industry-card reveal">
+                    <div class="industry-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Business Intelligence</h3>
+                    <p>Location analytics for market analysis, customer segmentation, and strategic business planning.</p>
+                    <ul class="industry-features">
+                        <li>Market analysis & segmentation</li>
+                        <li>Site selection optimization</li>
+                        <li>Customer location analytics</li>
+                        <li>Competitive analysis</li>
+                    </ul>
+                </div>
+                
+                <div class="industry-card reveal">
+                    <div class="industry-icon">
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <h3>Natural Resources</h3>
+                    <p>Geospatial solutions for agriculture, forestry, water resources, and mining industries.</p>
+                    <ul class="industry-features">
+                        <li>Crop health monitoring</li>
+                        <li>Forest inventory mapping</li>
+                        <li>Water resource management</li>
+                        <li>Mineral exploration</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -1223,7 +1246,7 @@
                             <i class="fas fa-envelope"></i>
                             <div>
                                 <strong>Email</strong><br>
-                                <a href="mailto:mezgebedingil@outlook.com" style="color: var(--text);">mezgebedingil@outlook.com</a>
+                                <a href="mailto:info@infospatial.com" style="color: var(--text);">info@infospatial.com</a>
                             </div>
                         </li>
                         <li>
@@ -1326,7 +1349,7 @@
                         <li><a href="#services">Services</a></li>
                         <li><a href="#about">About</a></li>
                         <li><a href="#expertise">Expertise</a></li>
-                        <li><a href="#experience">Experience</a></li>
+                        <li><a href="#industries">Industries</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
@@ -1346,7 +1369,7 @@
                 <div class="footer-section">
                     <h3>Contact Info</h3>
                     <ul class="footer-links">
-                        <li><i class="fas fa-envelope" style="margin-right: 8px; font-size: 0.9rem;"></i> mezgebedingil@outlook.com</li>
+                        <li><i class="fas fa-envelope" style="margin-right: 8px; font-size: 0.9rem;"></i> info@infospatial.com</li>
                         <li><i class="fas fa-phone" style="margin-right: 8px; font-size: 0.9rem;"></i> +251 947 723 995</li>
                         <li><i class="fas fa-map-marker-alt" style="margin-right: 8px; font-size: 0.9rem;"></i> Addis Ababa, Ethiopia</li>
                     </ul>
@@ -1495,5 +1518,4 @@
         });
     </script>
 </body>
-
 </html>
