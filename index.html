@@ -1,0 +1,1498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InfoSpatial | Geospatial Intelligence Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a5276; /* Deep professional blue */
+            --secondary: #27ae60; /* Growth/tech green */
+            --accent: #e74c3c;
+            --light: #f8f9fa;
+            --dark: #1a252f;
+            --text: #2c3e50;
+            --light-text: #7f8c8d;
+            --gradient: linear-gradient(135deg, var(--primary), #2c82c9);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: #f9f9f9;
+            scroll-behavior: smooth;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Roboto Slab', serif;
+            font-weight: 600;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background: var(--gradient);
+            color: white;
+            padding: 100px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 25px 25px, rgba(255,255,255,0.1) 2%, transparent 2%),
+                radial-gradient(circle at 75px 75px, rgba(255,255,255,0.1) 2%, transparent 2%);
+            background-size: 100px 100px;
+            opacity: 0.3;
+        }
+        
+        header h1 {
+            font-size: 3.2rem;
+            margin-bottom: 15px;
+            position: relative;
+            animation: fadeInDown 1s ease;
+        }
+        
+        header .tagline {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-weight: 300;
+            position: relative;
+            animation: fadeInUp 1s ease;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            position: relative;
+            opacity: 0.9;
+        }
+        
+        .header-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            position: relative;
+            animation: fadeIn 1.5s ease;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            font-size: 1rem;
+        }
+        
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+        
+        .btn-primary:hover {
+            background: var(--light);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+            border: 2px solid var(--secondary);
+        }
+        
+        .btn-secondary:hover {
+            background: transparent;
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(39, 174, 96, 0.3);
+        }
+        
+        /* Navigation */
+        nav {
+            background: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+        }
+        
+        .logo {
+            font-family: 'Roboto Slab', serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i {
+            color: var(--secondary);
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+        
+        .logo-tagline {
+            font-size: 0.7rem;
+            color: var(--secondary);
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 35px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--gradient);
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+        
+        section:nth-child(even) {
+            background-color: var(--light);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.8rem;
+            color: var(--primary);
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .section-title .title-decorator {
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--gradient);
+            margin: 0 auto 20px;
+            border-radius: 2px;
+        }
+        
+        .section-title p {
+            max-width: 700px;
+            margin: 20px auto 0;
+            color: var(--light-text);
+            font-size: 1.1rem;
+        }
+        
+        /* Hero Services Section */
+        .services-hero {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(to right, rgba(26, 82, 118, 0.05), rgba(39, 174, 96, 0.05));
+            border-radius: 15px;
+            margin-bottom: 50px;
+        }
+        
+        .services-hero h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .services-hero p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--light-text);
+        }
+        
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 15px;
+            padding: 35px 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+        
+        .service-icon {
+            font-size: 2.8rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .service-card p {
+            color: var(--light-text);
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+        
+        .service-features {
+            list-style: none;
+            margin-top: 20px;
+        }
+        
+        .service-features li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: var(--text);
+        }
+        
+        .service-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+        
+        /* About Section */
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 60px;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-text p {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .profile-img {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .profile-img::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            right: -20px;
+            bottom: 20px;
+            background: var(--gradient);
+            border-radius: 15px;
+            z-index: -1;
+            opacity: 0.1;
+        }
+        
+        .profile-img img {
+            width: 100%;
+            max-width: 450px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+        
+        /* GIS & Remote Sensing Section */
+        .gis-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .gis-item {
+            background-color: white;
+            padding: 35px 25px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+            border: 1px solid rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gis-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+        }
+        
+        .gis-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+        
+        .gis-icon {
+            font-size: 2.8rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .gis-item h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            min-height: 3.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .gis-item p {
+            color: var(--light-text);
+            margin-bottom: 15px;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+        
+        /* Experience Section */
+        .experience-timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .experience-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 100%;
+            background: var(--gradient);
+        }
+        
+        .experience-item {
+            background: white;
+            margin-bottom: 40px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        .experience-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        .experience-header {
+            background: var(--gradient);
+            color: white;
+            padding: 25px 30px;
+        }
+        
+        .experience-header h3 {
+            font-size: 1.6rem;
+            margin-bottom: 5px;
+        }
+        
+        .experience-company {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+        
+        .experience-date {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+        
+        .experience-content {
+            padding: 30px;
+        }
+        
+        .responsibilities {
+            list-style-type: none;
+            columns: 2;
+            column-gap: 40px;
+        }
+        
+        .responsibilities li {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+            break-inside: avoid;
+        }
+        
+        .responsibilities li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+        
+        /* Stats Section */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+        
+        .stat-item {
+            background: white;
+            padding: 40px 20px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            color: var(--light-text);
+            font-size: 1.1rem;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: var(--gradient);
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+            border-radius: 20px;
+            margin: 50px 0;
+        }
+        
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta-section p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+        
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+        }
+        
+        .contact-info {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+        
+        .contact-info h3 {
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+        
+        .contact-details {
+            list-style: none;
+        }
+        
+        .contact-details li {
+            margin-bottom: 25px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .contact-details i {
+            font-size: 1.3rem;
+            margin-right: 15px;
+            color: var(--secondary);
+            width: 30px;
+            margin-top: 5px;
+        }
+        
+        .contact-form {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--primary);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.2);
+        }
+        
+        textarea.form-control {
+            min-height: 180px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 80px 0 40px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--secondary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #95a5a6;
+            font-size: 0.9rem;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .experience-timeline::before {
+                left: 30px;
+            }
+            
+            .experience-item {
+                margin-left: 60px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .header .tagline {
+                font-size: 1.5rem;
+            }
+            
+            .responsibilities {
+                columns: 1;
+            }
+            
+            .services-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                padding: 80px 0 60px;
+            }
+            
+            header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .header .tagline {
+                font-size: 1.3rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                padding: 15px 0;
+            }
+            
+            .logo {
+                margin-bottom: 15px;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                margin-top: 10px;
+            }
+            
+            .nav-links li {
+                margin: 0 10px 10px;
+            }
+            
+            .header-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+            
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .contact-container, .footer-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .service-card, .gis-item, .experience-item {
+                padding: 25px 20px;
+            }
+            
+            .experience-content {
+                padding: 20px;
+            }
+        }
+
+        /* Form loading states */
+        .btn-primary:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .fa-spin {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Scroll animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="home">
+        <div class="header-pattern"></div>
+        <div class="container">
+            <h1>InfoSpatial</h1>
+            <div class="tagline">Where Data Finds Its Place</div>
+            <p>Transforming geospatial data into actionable intelligence for smarter business decisions and strategic planning. Expert GIS, Remote Sensing, and Data Analysis solutions.</p>
+            <div class="header-buttons">
+                <a href="#services" class="btn btn-primary">Explore Our Services</a>
+                <a href="#contact" class="btn btn-secondary">Book a Free Consultation</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-map-marked-alt"></i>
+                <div class="logo-text">
+                    <span>InfoSpatial</span>
+                    <span class="logo-tagline">GEOSPATIAL INTELLIGENCE</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#expertise">Expertise</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Geospatial Solutions</h2>
+                <div class="title-decorator"></div>
+                <p>Comprehensive GIS and Remote Sensing services tailored to your business needs</p>
+            </div>
+            
+            <div class="services-hero reveal">
+                <h3>Turn Location Data Into Competitive Advantage</h3>
+                <p>We specialize in transforming complex spatial data into clear, actionable insights that drive smarter decisions and optimize operations across industries.</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <div class="service-icon">
+                        <i class="fas fa-map"></i>
+                    </div>
+                    <h3>Custom Map Design</h3>
+                    <p>Professional cartography and thematic mapping for presentations, reports, and strategic planning. Tailored to your specific requirements and brand guidelines.</p>
+                    <ul class="service-features">
+                        <li>Thematic & Choropleth Maps</li>
+                        <li>Interactive Web Mapping</li>
+                        <li>3D Visualization & Fly-throughs</li>
+                        <li>Print-ready Cartography</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card reveal">
+                    <div class="service-icon">
+                        <i class="fas fa-satellite"></i>
+                    </div>
+                    <h3>Remote Sensing Analysis</h3>
+                    <p>Advanced satellite imagery processing for land use classification, change detection, environmental monitoring, and resource management.</p>
+                    <ul class="service-features">
+                        <li>Land Cover Classification</li>
+                        <li>Change Detection Analysis</li>
+                        <li>NDVI & Vegetation Health</li>
+                        <li>Disaster Impact Assessment</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card reveal">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Spatial Data Analysis</h3>
+                    <p>Advanced geospatial analysis using GIS tools and Python libraries to uncover patterns, relationships, and insights in location-based data.</p>
+                    <ul class="service-features">
+                        <li>Site Selection & Suitability</li>
+                        <li>Network Analysis & Routing</li>
+                        <li>Spatial Statistics & Modeling</li>
+                        <li>Hotspot & Cluster Analysis</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card reveal">
+                    <div class="service-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <h3>Interactive Dashboards</h3>
+                    <p>Real-time data visualization dashboards that integrate spatial and non-spatial data for comprehensive monitoring and decision-making.</p>
+                    <ul class="service-features">
+                        <li>Power BI & Tableau Integration</li>
+                        <li>Real-time Data Streaming</li>
+                        <li>Custom KPIs & Metrics</li>
+                        <li>Mobile-responsive Design</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card reveal">
+                    <div class="service-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>Geodatabase Management</h3>
+                    <p>Design, implementation, and maintenance of spatial databases for efficient storage, retrieval, and analysis of geospatial data.</p>
+                    <ul class="service-features">
+                        <li>PostgreSQL/PostGIS Setup</li>
+                        <li>Data Migration & Integration</li>
+                        <li>Quality Assurance & Cleaning</li>
+                        <li>Cloud Spatial Databases</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card reveal">
+                    <div class="service-icon">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h3>Training & Consulting</h3>
+                    <p>Capacity building and strategic consulting services to help organizations leverage geospatial technology effectively.</p>
+                    <ul class="service-features">
+                        <li>GIS Software Training</li>
+                        <li>Spatial Analysis Workshops</li>
+                        <li>Strategic Implementation Plans</li>
+                        <li>Ongoing Technical Support</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>About InfoSpatial</h2>
+                <div class="title-decorator"></div>
+                <p>Professional geospatial intelligence with 12+ years of industry experience</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text reveal">
+                    <p><strong>InfoSpatial</strong> is founded on the principle that location intelligence should be accessible, actionable, and transformative. With over 12 years of experience in GIS, Remote Sensing, and Data Analysis, we bridge the gap between complex spatial data and strategic business decisions.</p>
+                    <p>Our expertise spans across humanitarian response, urban planning, environmental monitoring, logistics optimization, and business intelligence. We combine technical proficiency with deep domain knowledge to deliver solutions that drive real impact.</p>
+                    <p>We believe in a collaborative approach, working closely with clients to understand their unique challenges and developing customized geospatial solutions that address specific needs while providing scalability for future growth.</p>
+                    <p>Our mission is to empower organizations with the spatial intelligence needed to make informed decisions, optimize operations, and gain a competitive edge in an increasingly data-driven world.</p>
+                </div>
+                <div class="profile-img reveal">
+                    <img src="https://ethiotech.net/portfolio/portfolio.JPG" alt="InfoSpatial Founder - Mezgebe Dingil">
+                </div>
+            </div>
+            
+            <!-- Stats Section -->
+            <div class="stats-container reveal" style="margin-top: 60px;">
+                <div class="stat-item">
+                    <div class="stat-number">12+</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">200+</div>
+                    <div class="stat-label">Projects Completed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Client Satisfaction</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Industry Sectors</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expertise Section -->
+    <section id="expertise">
+        <div class="container">
+            <div class="section-title">
+                <h2>Core Expertise</h2>
+                <div class="title-decorator"></div>
+                <p>Specialized skills in GIS, Remote Sensing, and Spatial Data Science</p>
+            </div>
+            <div class="gis-container">
+                <div class="gis-item reveal">
+                    <div class="gis-icon">
+                        <i class="fas fa-globe-africa"></i>
+                    </div>
+                    <h3>Advanced GIS Analysis</h3>
+                    <p>Spatial modeling, network analysis, suitability mapping, and geographic data processing using ArcGIS, QGIS, and open-source tools.</p>
+                </div>
+                
+                <div class="gis-item reveal">
+                    <div class="gis-icon">
+                        <i class="fas fa-satellite"></i>
+                    </div>
+                    <h3>Remote Sensing</h3>
+                    <p>Satellite imagery processing, classification, change detection, and environmental monitoring using ERDAS, ENVI, and Python.</p>
+                </div>
+                
+                <div class="gis-item reveal">
+                    <div class="gis-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3>Data Visualization</h3>
+                    <p>Interactive dashboards, infographics, and professional reporting using Power BI, Tableau, and custom web mapping applications.</p>
+                </div>
+                
+                <div class="gis-item reveal">
+                    <div class="gis-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Spatial Programming</h3>
+                    <p>Custom scripting and automation using Python, R, and JavaScript for geospatial data processing, analysis, and web mapping.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <div class="container">
+            <div class="section-title">
+                <h2>Professional Experience</h2>
+                <div class="title-decorator"></div>
+                <p>Proven track record in leading geospatial projects across multiple sectors</p>
+            </div>
+            
+            <div class="experience-timeline">
+                <div class="experience-item reveal">
+                    <div class="experience-header">
+                        <h3>Information Management Officer</h3>
+                        <div class="experience-company">IOM (International Organization for Migration)</div>
+                        <span class="experience-date">October 2023 – Present</span>
+                    </div>
+                    <div class="experience-content">
+                        <ul class="responsibilities">
+                            <li>Develop integrated data management systems for humanitarian response operations</li>
+                            <li>Create interactive dashboards and maps for donor reporting and decision-making</li>
+                            <li>Coordinate with UN agencies, NGOs, and government partners on data standards</li>
+                            <li>Lead capacity building workshops on data collection and analysis methodologies</li>
+                            <li>Implement GIS solutions for displacement tracking and needs assessment</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="experience-item reveal">
+                    <div class="experience-header">
+                        <h3>Information Management Officer</h3>
+                        <div class="experience-company">iMMAP (Information Management and Mine Action Programs)</div>
+                        <span class="experience-date">October 2022 – September 2023</span>
+                    </div>
+                    <div class="experience-content">
+                        <ul class="responsibilities">
+                            <li>Designed and deployed humanitarian information management systems</li>
+                            <li>Produced sector-specific maps and infographics for emergency response</li>
+                            <li>Managed spatial databases and conducted complex geospatial analysis</li>
+                            <li>Trained humanitarian partners on GIS and data visualization tools</li>
+                            <li>Supported needs assessment and monitoring/evaluation activities</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="experience-item reveal">
+                    <div class="experience-header">
+                        <h3>GIS Manager</h3>
+                        <div class="experience-company">Miya S.a.r.l.</div>
+                        <span class="experience-date">May 2022 – September 2022</span>
+                    </div>
+                    <div class="experience-content">
+                        <ul class="responsibilities">
+                            <li>Supervised GIS team and managed project deliverables</li>
+                            <li>Implemented quality control procedures for spatial data</li>
+                            <li>Developed training materials and conducted technical workshops</li>
+                            <li>Optimized geodatabase performance and server management</li>
+                            <li>Created monitoring and evaluation frameworks for GIS projects</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <div class="container">
+        <div class="cta-section reveal">
+            <h2>Ready to Transform Your Spatial Data?</h2>
+            <p>Book a free 30-minute geospatial strategy session to explore how location intelligence can benefit your organization.</p>
+            <a href="#contact" class="btn btn-primary" style="background: white; color: var(--primary);">Schedule Free Consultation</a>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Get In Touch</h2>
+                <div class="title-decorator"></div>
+                <p>Contact us for geospatial solutions, consulting, or project inquiries</p>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-info reveal">
+                    <h3>Contact Information</h3>
+                    <ul class="contact-details">
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <strong>Email</strong><br>
+                                <a href="mailto:mezgebedingil@outlook.com" style="color: var(--text);">mezgebedingil@outlook.com</a>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <strong>Phone</strong><br>
+                                +251 947 723 995
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <strong>Location</strong><br>
+                                Addis Ababa, Ethiopia<br>
+                                <small>Remote services available worldwide</small>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <strong>Consultation Hours</strong><br>
+                                Mon-Fri: 9:00 AM - 5:00 PM EAT<br>
+                                Response within 24 hours
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/company/infospatial" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://github.com/" title="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="https://www.upwork.com/" title="Upwork"><i class="fab fa-upwork"></i></a>
+                        <a href="https://twitter.com/" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                
+                <div class="contact-form reveal">
+                    <h3>Project Inquiry</h3>
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <label for="name">Your Name *</label>
+                            <input type="text" id="name" name="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Your Email *</label>
+                            <input type="email" id="email" name="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="company">Company/Organization</label>
+                            <input type="text" id="company" name="company" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="service">Service Interest</label>
+                            <select id="service" name="service" class="form-control">
+                                <option value="">Select a service</option>
+                                <option value="gis-analysis">GIS Analysis</option>
+                                <option value="remote-sensing">Remote Sensing</option>
+                                <option value="custom-mapping">Custom Mapping</option>
+                                <option value="dashboard">Data Dashboards</option>
+                                <option value="training">Training & Consulting</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Project Details *</label>
+                            <textarea id="message" name="message" class="form-control" placeholder="Tell us about your project, timeline, and specific requirements..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" id="submit-btn" style="width: 100%;">
+                            <span id="btn-text">Send Message</span>
+                            <div id="btn-loading" style="display: none;">
+                                <i class="fas fa-spinner fa-spin"></i> Sending...
+                            </div>
+                        </button>
+                        
+                        <div id="form-status" style="margin-top: 15px;"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h3>InfoSpatial</h3>
+                    <p>Transforming geospatial data into actionable intelligence for informed decision-making and strategic advantage.</p>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/company/infospatial"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://github.com/"><i class="fab fa-github"></i></a>
+                        <a href="https://www.upwork.com/"><i class="fab fa-upwork"></i></a>
+                        <a href="https://twitter.com/"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#expertise">Expertise</a></li>
+                        <li><a href="#experience">Experience</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#services">GIS Analysis</a></li>
+                        <li><a href="#services">Remote Sensing</a></li>
+                        <li><a href="#services">Custom Mapping</a></li>
+                        <li><a href="#services">Data Dashboards</a></li>
+                        <li><a href="#services">Geodatabase Management</a></li>
+                        <li><a href="#services">Training & Consulting</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope" style="margin-right: 8px; font-size: 0.9rem;"></i> mezgebedingil@outlook.com</li>
+                        <li><i class="fas fa-phone" style="margin-right: 8px; font-size: 0.9rem;"></i> +251 947 723 995</li>
+                        <li><i class="fas fa-map-marker-alt" style="margin-right: 8px; font-size: 0.9rem;"></i> Addis Ababa, Ethiopia</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 InfoSpatial | Geospatial Intelligence Solutions. All Rights Reserved.</p>
+                <p style="margin-top: 10px; font-size: 0.8rem;">"Where Data Finds Its Place"</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll animation
+        function revealOnScroll() {
+            const reveals = document.querySelectorAll('.reveal');
+            
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 100;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        }
+        
+        // Smooth scrolling for navigation links
+        document.addEventListener('DOMContentLoaded', function() {
+            // Scroll animation on load
+            window.addEventListener('load', revealOnScroll);
+            window.addEventListener('scroll', revealOnScroll);
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Form submission with AJAX
+            const contactForm = document.getElementById('contact-form');
+            const submitBtn = document.getElementById('submit-btn');
+            const btnText = document.getElementById('btn-text');
+            const btnLoading = document.getElementById('btn-loading');
+            const formStatus = document.getElementById('form-status');
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    // Show loading state
+                    btnText.style.display = 'none';
+                    btnLoading.style.display = 'block';
+                    submitBtn.disabled = true;
+                    formStatus.innerHTML = '';
+                    
+                    // Get form data
+                    const formData = new FormData(contactForm);
+                    
+                    try {
+                        const response = await fetch('https://formspree.io/f/mdkwvlqg', {
+                            method: 'POST',
+                            body: formData,
+                            headers: {
+                                'Accept': 'application/json'
+                            }
+                        });
+                        
+                        if (response.ok) {
+                            // Success - show custom popup
+                            showCustomPopup('success', 'Thank you for your message! We will get back to you within 24 hours to schedule your free consultation.');
+                            contactForm.reset();
+                        } else {
+                            // Error from Formspree
+                            showCustomPopup('error', 'Sorry, there was an error sending your message. Please try again or email us directly.');
+                        }
+                    } catch (error) {
+                        // Network error
+                        showCustomPopup('error', 'Network error. Please check your connection and try again.');
+                    } finally {
+                        // Reset button state
+                        btnText.style.display = 'block';
+                        btnLoading.style.display = 'none';
+                        submitBtn.disabled = false;
+                    }
+                });
+            }
+            
+            // Custom popup function
+            function showCustomPopup(type, message) {
+                // Create popup element
+                const popup = document.createElement('div');
+                popup.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: ${type === 'success' ? '#27ae60' : '#e74c3c'};
+                    color: white;
+                    padding: 25px 35px;
+                    border-radius: 12px;
+                    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+                    z-index: 10000;
+                    text-align: center;
+                    min-width: 350px;
+                    max-width: 500px;
+                    font-weight: 500;
+                    font-size: 1.1rem;
+                `;
+                
+                // Add icon based on type
+                const icon = type === 'success' ? '✓' : '⚠';
+                popup.innerHTML = `
+                    <div style="font-size: 2.5rem; margin-bottom: 15px;">${icon}</div>
+                    <div>${message}</div>
+                `;
+                
+                // Add to page
+                document.body.appendChild(popup);
+                
+                // Remove after 5 seconds
+                setTimeout(() => {
+                    popup.style.opacity = '0';
+                    popup.style.transition = 'opacity 0.5s ease';
+                    setTimeout(() => {
+                        if (popup.parentNode) {
+                            popup.parentNode.removeChild(popup);
+                        }
+                    }, 500);
+                }, 5000);
+            }
+        });
+    </script>
+</body>
+</html>
